@@ -20,7 +20,7 @@ def text_parse(text):
     #the input string as arguments for it
     if input[0] in actions_dict:
         if input[0] != "use":
-            actions_dict[input[0]](input[-1])
+            actions_dict[input[0]](input[1])
 
     #the quit command is special and has to be handled in a 
     #special way

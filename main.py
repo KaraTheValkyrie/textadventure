@@ -1,10 +1,10 @@
-from text_parse import text_parse
 from game_data import *
+from text_parse import text_parse
 
 #initialize the game
 #first, create a player object
 
-player = Player(PLAYER_STARTING_ROOM, [], PLAYER_FLAGS_DICT)
+
 
 def main():
     #run the main game loop

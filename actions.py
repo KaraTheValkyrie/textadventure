@@ -1,4 +1,5 @@
 from classes import *
+from game_data import *
 
 def look(target=None):
     #this command will describe everything in a room, or give
@@ -7,13 +8,16 @@ def look(target=None):
 
     #we need some if statements to figure out what to look at
     #if there was nothing specified, then check the current room
+
     if target == None:
         player.location.examine()
+        return
     
     #check if the player typed "check self", "look self", etc.
     #this is handled by a separate command, so just call it instead
     elif target == "self":
         status()
+        return
     
     #check if the target is in the current room's object, item, or
     #door arrays, or the player's inventory, and if it is, print the 
@@ -24,6 +28,7 @@ def look(target=None):
 
     if target_object != None:
         print(target_object.desc)
+        return
 
     #if the target object still can't be found, print an error message
     print("Error: Target not found.")

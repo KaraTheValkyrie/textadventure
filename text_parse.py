@@ -15,15 +15,16 @@ def text_parse(text):
     else:
         input = (text, None)
 
-    #check to see if the first word is in the action dictionary
-    #and if it is, then run the associated command using the rest of
-    #the input string as arguments for it
-    if input[0] in actions_dict:
-        if input[0] != "use":
-            actions_dict[input[0]](input[1])
-
     #the quit command is special and has to be handled in a 
     #special way
     if input[0] == "quit":
         quit()
+
+    #check to see if the first word is in the action dictionary
+    #and if it is, then run the associated command using the rest of
+    #the input string as arguments for it
+    if input[0] in actions_dict:
+        actions_dict[input[0]](input[1])
+    else:
+        print(ERR_INVALID_ACTION)
 

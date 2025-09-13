@@ -15,7 +15,7 @@ def look(target=None):
     
     #check if the player typed "check self", "look self", etc.
     #this is handled by a separate command, so just call it instead
-    elif target == "self":
+    if target == "self":
         status()
         return
     
@@ -28,6 +28,12 @@ def look(target=None):
 
     if target_object != None:
         print(target_object.desc)
+        #if the target is a container object, reveal all of the items
+        #inside it and print them too
+        if type(target_object) == Object:
+            for it in target_object.contains:
+                it.visible = True
+                print(it.desc)
         return
 
     #if the target object still can't be found, print an error message
@@ -35,6 +41,9 @@ def look(target=None):
 
 
 def take(item):
+    #if the input refers to an item that's visible, accessible, and in 
+    #the current room, it adds the item to the player's inventory and
+    #removes it from the room
     print(f"You take the {item}.")
 
 def move(direction):

@@ -2,8 +2,6 @@ from game_data import *
 from text_parse import text_parse
 
 #initialize the game
-#first, create a player object
-
 
 
 def main():

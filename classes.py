@@ -1,19 +1,25 @@
 from dataclasses import dataclass
 
 #areas the player can be in and that contain objects and items
-@dataclass
 class Room:
-    #the name of the room, for use with move()
-    name: tuple
-    #the description of the room, given when the player enters
-    #and when they use look() without any arguments
-    desc: str
-    #a list of doors to other rooms
-    doors: list
-    #a list of objects in the room
-    objects: list
-    #a list of items in the room
-    items: list
+    def __init__(self, name: tuple, desc: str, doors: list, objects: list, items: list):
+        #the name of the room, for use with move()
+        self.name = name
+        #the description of the room, given when the player enters
+        #and when they use look() without any arguments
+        self.desc = desc
+        #a list of doors to other rooms
+        self.doors = doors
+        #a list of objects in the room
+        self.objects = objects
+        #a list of items in the room
+        self.items = items
+
+        #we also need to set the room id for everything inside the room
+        #so that things can be removed from the room
+        for objects_list in ([self.doors, self.objects, self.items]):
+            for it in objects_list:
+                it.in_room = self
 
     #this function checks if the target string matches the name of
     #any item, door, or object in the room, returning the target object
@@ -55,6 +61,9 @@ class Object:
     contains: list
     #this defines interactions when an item is used on the object
     use_actions: dict
+    #the room the object is in. mainly used as a reference when we 
+    #need to remove the object from that room
+    in_room: Room = None
 
 #items in the environment that the player can look at, pick up,
 #and either use on objects or combine with other items        
@@ -81,6 +90,9 @@ class Item:
     visible: bool
     #this defines interactions the item has with other items
     combine_actions: dict
+    #the room the item is in. mainly used as a reference when we 
+    #need to remove the item from that room
+    in_room: Room = None
 
 #these lead to other rooms and may be locked
 @dataclass

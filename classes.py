@@ -20,19 +20,16 @@ class Room:
     #if found, and returning None otherwise
     def is_in_room(self, target):
         for it in self.items:
-            for name in it.names:
-                if name == target:
-                    return it
+            if target in it.names:
+                return it
         
         for obj in self.objects:
-            for name in obj.names:
-                if name == target:
-                    return obj
+            if target in obj.names:
+                return obj
         
         for d in self.doors:
-            for name in d.names:
-                if name == target:
-                    return d
+            if target in d.names:
+                return d
         
         return None
     
@@ -125,8 +122,7 @@ class Player:
     #with an item object
     def is_in_inv(self, target):
         for it in self.inventory:
-            for name in it.names:
-                if name == target:
-                    return it
+            if target in it.names:
+                return it
         
         return None

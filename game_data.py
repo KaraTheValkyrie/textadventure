@@ -35,13 +35,47 @@ corpse = Object(
         "corpse",
         "body",
         "dead body",
-        "dead scientist"
+        "dead scientist",
+        "remains",
+        "scientist"
     ),
     "This scientist has several lacerations across his chest. He seems to have been killed by a bladed weapon.",
-    "The remains of a scientist can be seen on the floor in a pool of blood.",
+    "The remains of a dead scientist can be seen on the floor in a pool of blood.",
     [id_card],
     {}
 )
+
+crate = Object(
+    (
+        "crate",
+        "box",
+        "wood box",
+        "wooden box",
+        "wooden crate",
+        "wood crate"
+    ),
+    """This crate stands half a meter in all directions and is labeled "Munitions". It seems like it could be opened with the right tool.""",
+    "A wooden crate is sitting in the corner.",
+    [],
+    {}
+)
+
+crate_destroyed = Item(
+    (
+        "wood scraps",
+        "broken box",
+        "broken crate",
+        "wood pieces"
+    ),
+    "some broken pieces of wood",
+    "A pile of broken wood planks sits in the corner.",
+    "A broken box sits in the corner.",
+    "Some broken pieces of wood. You don't know what to do with them.",
+    True,
+    True,
+    {}
+)
+
 
 room1 = Room(
     (
@@ -51,8 +85,8 @@ room1 = Room(
     ),
         "This is test room one.",
         [],
-        [],
-        [hammer]
+        [corpse, crate],
+        [hammer, id_card]
 )
 
 PLAYER_STARTING_ROOM = room1
@@ -63,5 +97,7 @@ PLAYER_FLAGS_DICT = {
 
 ERR_INVALID_ACTION = "Error: Invalid action."
 ERR_TARGET_NOT_FOUND = "Error: Target object not found."
+ERR_TARGET_INACCESSIBLE = "Error: Target object is inaccessible."
+ERR_TOO_HEAVY = "Error: Target object is too heavy to be carried."
 
 player = Player(PLAYER_STARTING_ROOM, [], PLAYER_FLAGS_DICT)
